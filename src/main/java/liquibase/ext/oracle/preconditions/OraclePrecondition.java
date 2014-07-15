@@ -11,9 +11,10 @@ import liquibase.exception.PreconditionErrorException;
 import liquibase.exception.PreconditionFailedException;
 import liquibase.exception.ValidationErrors;
 import liquibase.exception.Warnings;
+import liquibase.precondition.AbstractPrecondition;
 import liquibase.precondition.Precondition;
 
-public abstract class OraclePrecondition implements Precondition {
+public abstract class OraclePrecondition extends AbstractPrecondition {
 
 	void closeSilently( PreparedStatement ps ) {
 		if ( ps != null ) {
@@ -33,4 +34,8 @@ public abstract class OraclePrecondition implements Precondition {
 		}
 	}
 
+    @Override
+    public String getSerializedObjectNamespace() {
+        return GENERIC_CHANGELOG_EXTENSION_NAMESPACE;
+    }
 }
